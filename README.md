@@ -1,41 +1,52 @@
 # myFlix Angular Client
 
-A modern Angular client application for the myFlix movie database API. This project provides a user-friendly interface for browsing movies, managing user accounts, and maintaining favorite movie lists.
-
-## About
-
-This Angular application serves as the frontend client for the myFlix API, built as part of the Career Foundry Full-Stack Web Development program. Users can:
-
-- Browse and search through a comprehensive movie database
-- View detailed information about movies, directors, and genres
-- Create and manage user accounts
-- Maintain personalized favorite movie lists
-- Secure authentication and user session management
+A modern Angular 21 client application for the myFlix movie database. Built with standalone components, Angular Material, and connected to a live Heroku API.
 
 ## Features
 
-- **Movie Browsing**: View all available movies with detailed information
-- **User Management**: Registration, login, profile editing, and account deletion
-- **Favorites System**: Add and remove movies from personal favorites list
-- **Detailed Views**: In-depth information about movies, directors, and genres
-- **Responsive Design**: Optimized for both desktop and mobile devices
-- **Secure Authentication**: JWT token-based authentication system
+✅ **Welcome Screen**: Professional landing page with myFlix branding  
+✅ **Movie Cards**: Browse movies with Material Design cards  
+✅ **API Integration**: Connected to live Heroku backend  
+✅ **Routing**: Navigation between welcome and movies pages  
+✅ **Material Design**: Azure/Blue theme with responsive layout  
+✅ **Custom Logo**: Movie clapperboard branding throughout  
 
 ## Technology Stack
 
-- **Angular 21**: Modern web framework with standalone components
-- **TypeScript**: Type-safe development
-- **RxJS**: Reactive programming with Observables
-- **HttpClient**: HTTP communication with the API
-- **Angular CLI**: Development tooling and build system
+- **Angular 21**: Latest framework with standalone components and new control flow
+- **Angular Material**: Professional UI components with Azure theme
+- **TypeScript**: Full type safety and modern JavaScript features
+- **RxJS**: Reactive programming for API calls
+- **SCSS**: Advanced styling with Material Design integration
+- **Heroku API**: Live backend at `https://movieapi1-40cbbcb4b0ea.herokuapp.com/`
 
-## API Integration
+## Components
 
-The application integrates with the myFlix REST API providing the following endpoints:
+- **WelcomeComponent**: Landing page with logo and action buttons
+- **MovieCardComponent**: Displays movie catalog from API
+- **FetchApiDataService**: Complete API service with all endpoints
+- **Routing**: Clean navigation between views
 
+## Quick Start
+
+1. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+
+2. **Start development server**:
+   ```bash
+   ng serve
+   ```
+
+3. **Open browser**: Navigate to `http://localhost:4200/`
+
+## API Endpoints
+
+The FetchApiDataService includes:
 - User registration and authentication
-- Movie catalog management
-- User profile management
+- Movie catalog retrieval
+- User profile management  
 - Favorite movies functionality
 - Director and genre information
 
