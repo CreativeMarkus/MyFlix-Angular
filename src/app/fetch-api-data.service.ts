@@ -106,6 +106,10 @@ export class FetchApiDataService {
   getFavouriteMovies(): Observable<any> {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     const token = localStorage.getItem('token');
+
+    // Get favorites from localStorage as backup
+    const localFavorites = user.FavoriteMovies || user.Favorites || user.favoriteMovies || user.favorites || [];
+
     return this.http.get(apiUrl + 'users/' + user.Username, {
       headers: new HttpHeaders(
         {
@@ -114,9 +118,18 @@ export class FetchApiDataService {
     }).pipe(
       map(this.extractResponseData),
       map((data) => {
-        return data.FavoriteMovies || data.Favorites || data.favoriteMovies || data.favorites || [];
+        const apiFavorites = data.FavoriteMovies || data.Favorites || data.favoriteMovies || data.favorites;
+        // If API returns empty or undefined favorites but we have local favorites, use local
+        if ((!apiFavorites || apiFavorites.length === 0) && localFavorites.length > 0) {
+          console.log('Using localStorage favorites:', localFavorites);
+          return localFavorites;
+        }
+        return apiFavorites || [];
       }),
-      catchError(this.handleError)
+      catchError((error) => {
+        console.log('API error, using localStorage favorites:', localFavorites);
+        return of(localFavorites);
+      })
     );
   }
 
@@ -131,6 +144,22 @@ export class FetchApiDataService {
         })
     }).pipe(
       map(this.extractResponseData),
+      map((data) => {
+        // Update localStorage user data if API returns updated user
+        if (data && data.Username) {
+          localStorage.setItem('user', JSON.stringify(data));
+        } else {
+          // If API doesn't return user data, manually update localStorage
+          const currentUser = JSON.parse(localStorage.getItem('user') || '{}');
+          const currentFavorites = currentUser.FavoriteMovies || [];
+          if (!currentFavorites.includes(movieId)) {
+            currentFavorites.push(movieId);
+            currentUser.FavoriteMovies = currentFavorites;
+            localStorage.setItem('user', JSON.stringify(currentUser));
+          }
+        }
+        return data;
+      }),
       catchError(this.handleError)
     );
   }
@@ -175,6 +204,20 @@ export class FetchApiDataService {
         })
     }).pipe(
       map(this.extractResponseData),
+      map((data) => {
+        // Update localStorage user data if API returns updated user
+        if (data && data.Username) {
+          localStorage.setItem('user', JSON.stringify(data));
+        } else {
+          // If API doesn't return user data, manually update localStorage
+          const currentUser = JSON.parse(localStorage.getItem('user') || '{}');
+          let currentFavorites = currentUser.FavoriteMovies || [];
+          currentFavorites = currentFavorites.filter((id: string) => id !== movieId);
+          currentUser.FavoriteMovies = currentFavorites;
+          localStorage.setItem('user', JSON.stringify(currentUser));
+        }
+        return data;
+      }),
       catchError(this.handleError)
     );
   }

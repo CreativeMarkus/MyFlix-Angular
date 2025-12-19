@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FetchApiDataService } from '../fetch-api-data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -21,7 +21,8 @@ export class UserProfileComponent implements OnInit {
         public fetchApiData: FetchApiDataService,
         public snackBar: MatSnackBar,
         private router: Router,
-        public dialog: MatDialog
+        public dialog: MatDialog,
+        private cdr: ChangeDetectorRef
     ) { }
 
     ngOnInit(): void {
@@ -40,6 +41,8 @@ export class UserProfileComponent implements OnInit {
                 console.log('Set favoriteMovies from localStorage:', this.favoriteMovies);
             }
         }
+
+        this.getUserProfile();
         this.getFavoriteMovies();
         this.getAllMovies();
     }
@@ -69,17 +72,26 @@ export class UserProfileComponent implements OnInit {
             console.log('User Profile - Favorite movies API response:', result);
             console.log('User Profile - Type of result:', typeof result);
             console.log('User Profile - Is array:', Array.isArray(result));
-            this.favoriteMovies = result || [];
-            console.log('User Profile - Final favoriteMovies array:', this.favoriteMovies);
+
+            if (Array.isArray(result) && result.length > 0) {
+                this.favoriteMovies = result;
+                console.log('User Profile - Updated favoriteMovies from API:', this.favoriteMovies);
+            }
+
+            // Trigger change detection
+            this.cdr.detectChanges();
         }, (error: any) => {
             console.error('Error fetching favorite movies:', error);
-            this.favoriteMovies = [];
+            // Keep localStorage favorites if API fails
         });
     }
 
     getAllMovies(): void {
         this.fetchApiData.getAllMovies().subscribe((result: any) => {
             this.allMovies = result;
+            console.log('All movies loaded, triggering change detection');
+            // Force change detection after all data is loaded
+            this.cdr.detectChanges();
         }, (error: any) => {
             console.error('Error fetching all movies:', error);
         });
