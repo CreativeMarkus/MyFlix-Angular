@@ -50,7 +50,7 @@ export class MovieCardComponent implements OnInit, AfterViewInit {
           Director: { Name: 'Frank Darabont' },
           Genre: { Name: 'Drama' },
           Description: 'Two imprisoned men bond over several years, finding solace and eventual redemption through acts of common decency.',
-          ImagePath: 'https://picsum.photos/300/400?random=1',
+          ImagePath: 'https://m.media-amazon.com/images/I/51rXi2SXCXL._AC_.jpg',
           imageError: false
         },
         {
@@ -59,7 +59,7 @@ export class MovieCardComponent implements OnInit, AfterViewInit {
           Director: { Name: 'Francis Ford Coppola' },
           Genre: { Name: 'Crime' },
           Description: 'The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.',
-          ImagePath: 'https://picsum.photos/300/400?random=2',
+          ImagePath: 'https://m.media-amazon.com/images/I/510L5ypQBdL._AC_SL1024_.jpg',
           imageError: false
         },
         {
@@ -68,7 +68,7 @@ export class MovieCardComponent implements OnInit, AfterViewInit {
           Director: { Name: 'Quentin Tarantino' },
           Genre: { Name: 'Crime' },
           Description: 'The lives of two mob hitmen, a boxer, a gangster and his wife intertwine in four tales of violence and redemption.',
-          ImagePath: 'https://picsum.photos/300/400?random=3',
+          ImagePath: 'https://m.media-amazon.com/images/I/61Z4YX7EbtL._AC_.jpg',
           imageError: false
         }
       ];
