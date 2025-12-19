@@ -6,12 +6,42 @@
         <p>If this persists, check the console for API errors.</p>
     </div>
 
+    <!-- Sample movies notice for logged-out users -->
+    <div *ngIf="movies.length > 0 && !isUserLoggedIn()" class="sample-notice">
+        <mat-card class="notice-card">
+            <mat-card-content>
+                <div class="notice-content">
+                    <mat-icon class="notice-icon">info</mat-icon>
+                    <div class="notice-text">
+                        <p><strong>Sample Movies Preview</strong></p>
+                        <p>Sign up or log in to access our complete movie database with personalized favorites and
+                            recommendations!</p>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
     <div class="movies-grid" *ngIf="movies.length > 0">
-        <mat-card *ngFor="let movie of movies; let i=index;" class="movie-card" (click)="showMovieDetails(movie)">
+        <mat-card *ngFor="let movie of movies; let i=index; trackBy: trackByMovieId" class="movie-card"
+            (click)="showMovieDetails(movie)">
             <mat-card-header>
                 <mat-card-title>{{movie.Title}}</mat-card-title>
             </mat-card-header>
-            <img mat-card-image [src]="movie.ImagePath" [alt]="movie.Title + ' movie poster'" alt="Movie poster" />
+
+            <!-- Image with fallback -->
+            <div class="image-container">
+                <img *ngIf="!movie.imageError" mat-card-image [src]="movie.ImagePath"
+                    [alt]="movie.Title + ' movie poster'" (error)="setImageError(movie)"
+                    (load)="clearImageError(movie)" />
+
+                <!-- Angular Material fallback when image fails -->
+                <div *ngIf="movie.imageError" class="image-placeholder">
+                    <mat-icon class="poster-icon">movie</mat-icon>
+                    <span class="poster-text">{{movie.Title}}</span>
+                </div>
+            </div>
+
             <mat-card-content>
                 <p><strong>Director:</strong> {{movie.Director?.Name}}</p>
                 <p><strong>Genre:</strong> {{movie.Genre?.Name}}</p>

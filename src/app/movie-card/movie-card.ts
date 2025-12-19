@@ -42,11 +42,37 @@ export class MovieCardComponent implements OnInit, AfterViewInit {
       return this.movies;
     }, (error) => {
       console.log('Error fetching movies:', error);
-      // Add some mock data to test the dialog
+      // Add some sample movie data for demonstration
       this.movies = [
-        { Title: 'Test Movie 1', ImagePath: 'https://via.placeholder.com/300x400?text=Movie1' },
-        { Title: 'Test Movie 2', ImagePath: 'https://via.placeholder.com/300x400?text=Movie2' }
+        {
+          _id: '1',
+          Title: 'The Shawshank Redemption',
+          Director: { Name: 'Frank Darabont' },
+          Genre: { Name: 'Drama' },
+          Description: 'Two imprisoned men bond over several years, finding solace and eventual redemption through acts of common decency.',
+          ImagePath: 'https://picsum.photos/300/400?random=1',
+          imageError: false
+        },
+        {
+          _id: '2',
+          Title: 'The Godfather',
+          Director: { Name: 'Francis Ford Coppola' },
+          Genre: { Name: 'Crime' },
+          Description: 'The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.',
+          ImagePath: 'https://picsum.photos/300/400?random=2',
+          imageError: false
+        },
+        {
+          _id: '3',
+          Title: 'Pulp Fiction',
+          Director: { Name: 'Quentin Tarantino' },
+          Genre: { Name: 'Crime' },
+          Description: 'The lives of two mob hitmen, a boxer, a gangster and his wife intertwine in four tales of violence and redemption.',
+          ImagePath: 'https://picsum.photos/300/400?random=3',
+          imageError: false
+        }
       ];
+      console.log('Using fallback movie data:', this.movies);
       this.cdr.detectChanges();
     });
   }
@@ -56,6 +82,31 @@ export class MovieCardComponent implements OnInit, AfterViewInit {
     if (userData) {
       this.user = JSON.parse(userData);
     }
+  }
+
+  isUserLoggedIn(): boolean {
+    return localStorage.getItem('token') !== null && localStorage.getItem('user') !== null;
+  }
+
+  onImageError(event: any): void {
+    console.log('Image failed to load:', event.target.src);
+    // Set a fallback image that should work
+    event.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDMwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjNjY3ZWVhIi8+Cjx0ZXh0IHg9IjE1MCIgeT0iMTgwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJ3aGl0ZSIgZm9udC1zaXplPSIxNiIgZm9udC1mYW1pbHk9IkFyaWFsIj5Nb3ZpZTwvdGV4dD4KPHR0ZXh0IHg9IjE1MCIgeT0iMjEwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJ3aGl0ZSIgZm9udC1zaXplPSIxNiIgZm9udC1mYW1pbHk9IkFyaWFsIj5Qb3N0ZXI8L3RleHQ+Cjwvc3ZnPgo=';
+  }
+
+  trackByMovieId(index: number, movie: any): string {
+    return movie._id || index.toString();
+  }
+
+  setImageError(movie: any): void {
+    console.log('Image failed to load for:', movie.Title);
+    movie.imageError = true;
+    this.cdr.detectChanges();
+  }
+
+  clearImageError(movie: any): void {
+    console.log('Image loaded successfully for:', movie.Title);
+    movie.imageError = false;
   }
 
   getFavoriteMovies(): void {
