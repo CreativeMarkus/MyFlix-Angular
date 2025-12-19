@@ -121,65 +121,88 @@ The **FetchApiDataService** provides comprehensive backend connectivity:
 - **Remove Favorite**: `deleteFavouriteMovie(movieId)` - Remove from favorites
 - **Backup System**: Automatic localStorage fallback for offline functionality
 
-## Project Structure
+## 📁 Project Structure
 
 ```
-src/app/
-├── app.component.ts              # Root component with dialog management
-├── app.module.ts                 # NgModule with all imports and declarations
-├── fetch-api-data.service.ts     # API service for backend communication
-├── user-registration-form/       # Registration dialog component
-└── user-login-form/              # Login dialog component
+src/
+├── app/
+│   ├── app.component.*                    # Root application component
+│   ├── app.module.ts                      # Main NgModule configuration
+│   ├── fetch-api-data.service.ts          # API service with localStorage fallbacks
+│   ├── movie-card/                        # Movie display cards
+│   ├── movie-details-dialog/              # Movie information modal
+│   ├── movie-director-dialog/             # Director biography modal  
+│   ├── movie-genre-dialog/                # Genre information modal
+│   ├── movie-synopsis-dialog/             # Movie synopsis modal
+│   ├── movies/                            # Movie catalog component
+│   ├── navbar/                            # Navigation component
+│   ├── user-login-form/                   # Login form component
+│   ├── user-profile/                      # User profile management
+│   ├── user-registration-form/            # Registration form component
+│   └── welcome-page/                      # Landing page component
+├── assets/                                # Static assets
+├── styles.scss                            # Global styles
+└── index.html                             # Application entry point
 ```
 
-## Development server
+## 🧪 Development & Testing
 
-To start a local development server, run:
-
+### Development Server
 ```bash
 ng serve
+# Application available at http://localhost:4200/
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Building
-
-To build the project for production:
-
+### Production Build
 ```bash
-ng build
+ng build --configuration production
+# Output: dist/my-flix-angular-client/
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. The production build is optimized for performance and speed.
-
-## Testing
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner:
-
+### Testing
 ```bash
-ng test
+ng test          # Unit tests with Vitest
+ng e2e           # End-to-end testing (framework of choice)
 ```
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component:
-
+### Code Generation
 ```bash
-ng generate component component-name
+ng generate component component-name    # Generate new component
+ng generate service service-name        # Generate new service
+ng generate --help                      # View all available schematics
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`):
+## 🚀 Deployment
 
+This application is automatically deployed to GitHub Pages using `angular-cli-ghpages`.
+
+### Live Application
+- **URL**: https://creativemarkus.github.io/MyFlix-Angular/
+- **Branch**: `gh-pages` (auto-generated)
+- **Build**: Production optimized
+
+### Deployment Process
 ```bash
-ng generate --help
+ng deploy --base-href=/MyFlix-Angular/
 ```
 
-```bash
-ng e2e
-```
+This command:
+1. Builds the application for production
+2. Creates necessary GitHub Pages files (404.html, .nojekyll)
+3. Commits build artifacts to `gh-pages` branch
+4. Pushes to GitHub for automatic deployment
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## 📚 Additional Resources
 
-## Additional Resources
+- **[Angular CLI Documentation](https://angular.dev/tools/cli)** - Complete CLI reference
+- **[Angular Material](https://material.angular.io/)** - UI component library
+- **[GitHub Pages](https://pages.github.com/)** - Static site hosting
+- **[myFlix API Documentation](https://movieapi1-40cbbcb4b0ea.herokuapp.com/)** - Backend API reference
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## 👨‍💻 Developer
+
+**Markus** - [GitHub Profile](https://github.com/CreativeMarkus)
+
+## 📄 License
+
+This project is part of the CareerFoundry Full-Stack Web Development Program.
