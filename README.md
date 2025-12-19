@@ -1,56 +1,125 @@
 # myFlix Angular Client
 
-An Angular 21 client application for the myFlix movie database, built following CareerFoundry Lesson 6.3 requirements. Features user registration and login with Angular Material dialogs and traditional NgModule architecture.
+A complete Angular 17+ client application for the myFlix movie database, featuring user authentication, movie browsing, favorites management, and user profiles. Built with Angular Material and deployed on GitHub Pages.
 
-## Features
+## 🌐 Live Application
 
-✅ **Welcome Screen**: Professional landing page with myFlix logo and branding  
-✅ **User Registration**: Modal dialog form with validation and API integration  
-✅ **User Login**: Authentication with token and user data storage  
-✅ **Angular Material**: Complete UI component integration with dialogs and forms  
-✅ **API Integration**: Connected to live Heroku backend with HttpClient  
-✅ **NgModule Architecture**: Traditional Angular module structure (lesson compliant)  
-✅ **Local Storage**: Secure token and user data persistence  
+**[View Live Application →](https://creativemarkus.github.io/MyFlix-Angular/)**
 
-## Technology Stack
+## ✨ Features
 
-- **Angular 21**: Latest framework with NgModule-based architecture
-- **Angular Material**: Professional UI components and dialog system
+### Core Functionality
+✅ **Welcome Screen**: Professional landing page with registration and login options  
+✅ **User Registration**: Secure account creation with form validation  
+✅ **User Authentication**: Login system with JWT token management  
+✅ **Movie Catalog**: Browse complete movie database with detailed information  
+✅ **Movie Details**: View comprehensive movie information, director, and genre details  
+✅ **Favorites System**: Add/remove movies from personal favorites with localStorage backup  
+✅ **User Profile**: Manage account details and view favorite movies collection  
+✅ **Responsive Navigation**: Clean navbar with user-specific options  
+
+### Technical Features  
+✅ **Angular Material**: Professional UI with consistent Material Design  
+✅ **API Integration**: Full backend connectivity with fallback mechanisms  
+✅ **NgModule Architecture**: Traditional Angular module structure  
+✅ **Local Storage**: Persistent user data and favorites backup  
+✅ **GitHub Pages**: Automated deployment pipeline  
+✅ **Error Handling**: Comprehensive error management and user feedback  
+
+## 🛠️ Technology Stack
+
+- **Angular 17+**: Modern framework with NgModule-based architecture
+- **Angular Material**: Complete UI component library with theming
 - **TypeScript**: Full type safety and modern JavaScript features
-- **RxJS**: Reactive programming for HTTP API calls
-- **FormsModule**: Two-way data binding with [(ngModel)]
+- **RxJS**: Reactive programming for HTTP API calls and state management
+- **Angular Router**: SPA navigation and route protection
+- **FormsModule**: Two-way data binding with validation
 - **SCSS**: Custom styling with Material Design theming
-- **Heroku API**: Live backend at `https://movieapi1-40cbbcb4b0ea.herokuapp.com/`
+- **angular-cli-ghpages**: Automated GitHub Pages deployment
+- **Backend API**: Live Heroku backend at `https://movieapi1-40cbbcb4b0ea.herokuapp.com/`
 
-## Components
+## 📱 Components & Architecture
 
-- **AppComponent**: Root component with dialog launchers and welcome interface
-- **UserRegistrationFormComponent**: Registration form with Material Design
-- **UserLoginFormComponent**: Authentication form with local storage integration
-- **FetchApiDataService**: Complete API service with registration and login endpoints
+### Core Components
+- **AppComponent**: Main application shell with routing
+- **WelcomePageComponent**: Landing page with authentication entry points
+- **UserRegistrationFormComponent**: Account creation with validation
+- **UserLoginFormComponent**: Authentication with token management
+- **NavbarComponent**: Navigation bar with user-specific menu options
+- **MoviesComponent**: Movie catalog display with search and filtering
+- **UserProfileComponent**: Profile management and favorites display
+- **MovieCardComponent**: Individual movie display cards
 
-## Quick Start
+### Dialog Components
+- **MovieDetailsDialogComponent**: Complete movie information modal
+- **MovieDirectorDialogComponent**: Director biography and details
+- **MovieGenreDialogComponent**: Genre information and descriptions
+- **MovieSynopsisDialogComponent**: Full movie plot summaries
 
-1. **Install dependencies**:
+### Services
+- **FetchApiDataService**: Complete API integration with localStorage fallbacks
+
+## 🚀 Quick Start
+
+### Prerequisites
+- Node.js 18+ and npm
+- Angular CLI (`npm install -g @angular/cli`)
+
+### Local Development
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/CreativeMarkus/MyFlix-Angular.git
+   cd MyFlix-Angular
+   ```
+
+2. **Install dependencies**:
    ```bash
    npm install
    ```
 
-2. **Start development server**:
+3. **Start development server**:
    ```bash
    ng serve
+   # or
+   npm start
    ```
 
-3. **Open browser**: Navigate to `http://localhost:4200/`
+4. **Open browser**: Navigate to `http://localhost:4200/`
 
-## API Integration
+### Production Build
 
-The FetchApiDataService provides:
+```bash
+ng build --configuration production
+```
+
+### Deploy to GitHub Pages
+
+```bash
+ng deploy --base-href=/MyFlix-Angular/
+```
+
+## 🔌 API Integration
+
+The **FetchApiDataService** provides comprehensive backend connectivity:
+
+### User Management
 - **User Registration**: `userRegistration(userDetails)` - Create new user accounts
-- **User Authentication**: `userLogin(userDetails)` - Login with credentials
-- **Token Management**: Automatic storage of JWT tokens in localStorage
-- **Movie Endpoints**: Ready for future movie catalog integration
-- **Error Handling**: Complete error management with user feedback
+- **User Authentication**: `userLogin(userDetails)` - JWT-based login system
+- **User Profile**: `getUser()`, `editUser()`, `deleteUser()` - Profile management
+- **Token Management**: Automatic JWT storage and validation
+
+### Movie Operations
+- **All Movies**: `getAllMovies()` - Fetch complete movie catalog
+- **Movie Details**: `getMovie(title)` - Get specific movie information
+- **Director Info**: `getDirector(name)` - Director biographical data
+- **Genre Info**: `getGenre(name)` - Genre descriptions and details
+
+### Favorites System
+- **Get Favorites**: `getFavouriteMovies()` - Retrieve user's favorite movies
+- **Add Favorite**: `addFavouriteMovie(movieId)` - Add movie to favorites
+- **Remove Favorite**: `deleteFavouriteMovie(movieId)` - Remove from favorites
+- **Backup System**: Automatic localStorage fallback for offline functionality
 
 ## Project Structure
 
