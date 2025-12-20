@@ -1,1 +1,22 @@
-<p>movie-synopsis-dialog works!</p>
+<div class="dialog-container">
+    <h2 mat-dialog-title>Movie Synopsis</h2>
+
+    <mat-dialog-content>
+        <div class="synopsis-info">
+            <h3>{{data.Title}}</h3>
+
+            <div class="synopsis-content">
+                <p>{{data.Description}}</p>
+            </div>
+
+            <div class="movie-details">
+                <p><strong>Director:</strong> {{data.Director?.Name}}</p>
+                <p><strong>Genre:</strong> {{data.Genre?.Name}}</p>
+            </div>
+        </div>
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="end">
+        <button mat-button (click)="onClose()" color="primary">Close</button>
+    </mat-dialog-actions>
+</div>

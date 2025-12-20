@@ -1,0 +1,25 @@
+.dialog-container {
+    min-width: 300px;
+}
+
+.genre-info {
+    margin-bottom: 20px;
+
+    h3 {
+        color: #1976d2;
+        margin-bottom: 10px;
+    }
+
+    p {
+        line-height: 1.6;
+        margin-bottom: 10px;
+    }
+}
+
+.movie-context {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #e0e0e0;
+    color: #666;
+    font-style: italic;
+}

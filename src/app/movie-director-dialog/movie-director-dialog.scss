@@ -1,0 +1,45 @@
+.dialog-container {
+    min-width: 400px;
+}
+
+.director-info {
+    margin-bottom: 20px;
+
+    h3 {
+        color: #1976d2;
+        margin-bottom: 15px;
+    }
+
+    h4 {
+        color: #333;
+        margin-bottom: 10px;
+        margin-top: 15px;
+    }
+
+    p {
+        line-height: 1.6;
+        margin-bottom: 10px;
+    }
+
+    .bio-section {
+        margin-bottom: 15px;
+    }
+
+    .birth-section,
+    .death-section {
+        margin-bottom: 8px;
+    }
+
+    .no-info {
+        color: #666;
+        font-style: italic;
+    }
+}
+
+.movie-context {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #e0e0e0;
+    color: #666;
+    font-style: italic;
+}

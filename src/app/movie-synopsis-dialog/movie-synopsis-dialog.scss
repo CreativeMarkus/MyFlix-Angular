@@ -1,0 +1,32 @@
+.dialog-container {
+    min-width: 500px;
+}
+
+.synopsis-info {
+
+    h3 {
+        color: #1976d2;
+        margin-bottom: 15px;
+    }
+
+    .synopsis-content {
+        margin-bottom: 20px;
+
+        p {
+            line-height: 1.6;
+            font-size: 16px;
+            text-align: justify;
+        }
+    }
+
+    .movie-details {
+        margin-top: 20px;
+        padding-top: 15px;
+        border-top: 1px solid #e0e0e0;
+
+        p {
+            margin-bottom: 8px;
+            color: #666;
+        }
+    }
+}

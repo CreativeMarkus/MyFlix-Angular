@@ -23,6 +23,9 @@ import { MovieCardComponent } from './movie-card/movie-card';
 import { WelcomePageComponent } from './welcome-page/welcome-page';
 import { MoviesComponent } from './movies/movies';
 import { MovieDetailsDialogComponent } from './movie-details-dialog/movie-details-dialog';
+import { MovieGenreDialogComponent } from './movie-genre-dialog/movie-genre-dialog';
+import { MovieDirectorDialogComponent } from './movie-director-dialog/movie-director-dialog';
+import { MovieSynopsisDialogComponent } from './movie-synopsis-dialog/movie-synopsis-dialog';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { NavbarComponent } from './navbar/navbar.component';
 
@@ -42,6 +45,9 @@ const appRoutes: Routes = [
         WelcomePageComponent,
         MoviesComponent,
         MovieDetailsDialogComponent,
+        MovieGenreDialogComponent,
+        MovieDirectorDialogComponent,
+        MovieSynopsisDialogComponent,
         UserProfileComponent,
         NavbarComponent
     ],

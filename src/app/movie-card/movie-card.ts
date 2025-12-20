@@ -3,6 +3,9 @@ import { FetchApiDataService } from '../fetch-api-data.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MovieDetailsDialogComponent } from '../movie-details-dialog/movie-details-dialog';
+import { MovieGenreDialogComponent } from '../movie-genre-dialog/movie-genre-dialog';
+import { MovieDirectorDialogComponent } from '../movie-director-dialog/movie-director-dialog';
+import { MovieSynopsisDialogComponent } from '../movie-synopsis-dialog/movie-synopsis-dialog';
 
 @Component({
   selector: 'app-movie-card',
@@ -176,6 +179,30 @@ export class MovieCardComponent implements OnInit, AfterViewInit {
   showMovieDetails(movie: any): void {
     console.log('Movie clicked:', movie);
     this.dialog.open(MovieDetailsDialogComponent, {
+      width: '600px',
+      data: movie
+    });
+  }
+
+  showGenreDetails(movie: any): void {
+    console.log('Genre clicked:', movie.Genre);
+    this.dialog.open(MovieGenreDialogComponent, {
+      width: '400px',
+      data: movie
+    });
+  }
+
+  showDirectorDetails(movie: any): void {
+    console.log('Director clicked:', movie.Director);
+    this.dialog.open(MovieDirectorDialogComponent, {
+      width: '500px',
+      data: movie
+    });
+  }
+
+  showSynopsisDetails(movie: any): void {
+    console.log('Synopsis clicked:', movie);
+    this.dialog.open(MovieSynopsisDialogComponent, {
       width: '600px',
       data: movie
     });
