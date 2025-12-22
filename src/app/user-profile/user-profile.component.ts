@@ -1,3 +1,7 @@
+/**
+ * User profile component for displaying and editing user information.
+ * Shows user details, favorite movies, and provides account management functionality.
+ */
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FetchApiDataService } from '../fetch-api-data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -5,18 +9,35 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
-    selector: 'app-user-profile',
-    standalone: false,
+    selector: 'app-user-profile',    // Component CSS selector
+    standalone: false,               // Part of NgModule
     templateUrl: './user-profile.component.html',
     styleUrls: ['./user-profile.component.scss']
 })
 export class UserProfileComponent implements OnInit {
+    /** Current user data object */
     user: any = {};
+
+    /** Array of user's favorite movies */
     favoriteMovies: any[] = [];
+
+    /** Array of all available movies */
     allMovies: any[] = [];
+
+    /** Flag to control edit mode state */
     editMode: boolean = false;
+
+    /** Temporary object for storing user updates during editing */
     updatedUser: any = {};
 
+    /**
+     * Constructor injects required services and dependencies
+     * @param fetchApiData - Service for API communication
+     * @param snackBar - Material snackbar for user notifications
+     * @param router - Angular router for navigation
+     * @param dialog - Material dialog service for modals
+     * @param cdr - Change detector reference for manual change detection
+     */
     constructor(
         public fetchApiData: FetchApiDataService,
         public snackBar: MatSnackBar,
@@ -25,6 +46,10 @@ export class UserProfileComponent implements OnInit {
         private cdr: ChangeDetectorRef
     ) { }
 
+    /**
+     * Component initialization lifecycle hook.
+     * Loads user data from localStorage and initiates API calls for profile and favorites.
+     */
     ngOnInit(): void {
         console.log('=== User Profile Component Init ===');
         const userFromStorage = localStorage.getItem('user');
@@ -47,6 +72,10 @@ export class UserProfileComponent implements OnInit {
         this.getAllMovies();
     }
 
+    /**
+     * Fetches the current user's profile data from the API.
+     * Updates both user object and favorites array with fresh data.
+     */
     getUserProfile(): void {
         this.fetchApiData.getOneUser().subscribe((result: any) => {
             console.log('getUserProfile - Full API response:', result);
@@ -67,6 +96,10 @@ export class UserProfileComponent implements OnInit {
         });
     }
 
+    /**
+     * Fetches the user's favorite movies from the API.
+     * Updates the favoriteMovies array and triggers change detection.
+     */
     getFavoriteMovies(): void {
         this.fetchApiData.getFavouriteMovies().subscribe((result: any) => {
             console.log('User Profile - Favorite movies API response:', result);
@@ -86,6 +119,10 @@ export class UserProfileComponent implements OnInit {
         });
     }
 
+    /**
+     * Fetches all movies from the API for display purposes.
+     * Triggers change detection after data is loaded.
+     */
     getAllMovies(): void {
         this.fetchApiData.getAllMovies().subscribe((result: any) => {
             this.allMovies = result;
@@ -159,7 +196,7 @@ export class UserProfileComponent implements OnInit {
         const favoriteMovies = this.allMovies.filter(movie => {
             const isIncluded = this.favoriteMovies.includes(movie._id);
             if (isIncluded) {
-                console.log(`✓ Movie ${movie.Title} (${movie._id}): INCLUDED`);
+                console.log(`Movie ${movie.Title} (${movie._id}): INCLUDED`);
             }
             return isIncluded;
         });

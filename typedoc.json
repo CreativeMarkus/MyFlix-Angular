@@ -1,0 +1,28 @@
+{
+    "entryPoints": [
+        "src/app"
+    ],
+    "entryPointStrategy": "expand",
+    "out": "docs",
+    "excludeExternals": true,
+    "excludePrivate": true,
+    "excludeProtected": false,
+    "includeVersion": true,
+    "theme": "default",
+    "name": "MyFlix Angular Client Documentation",
+    "readme": "README.md",
+    "exclude": [
+        "**/*.spec.ts",
+        "**/*.test.ts",
+        "**/node_modules/**",
+        "**/dist/**"
+    ],
+    "categorizeByGroup": false,
+    "defaultCategory": "Other",
+    "categoryOrder": [
+        "Components",
+        "Services",
+        "Models",
+        "Other"
+    ]
+}

@@ -1,3 +1,8 @@
+/**
+ * Component for displaying movie cards in a grid layout.
+ * Handles movie data display, favorites management, and dialog interactions
+ * for viewing movie details, genres, directors, and synopses.
+ */
 import { Component, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { FetchApiDataService } from '../fetch-api-data.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -8,16 +13,28 @@ import { MovieDirectorDialogComponent } from '../movie-director-dialog/movie-dir
 import { MovieSynopsisDialogComponent } from '../movie-synopsis-dialog/movie-synopsis-dialog';
 
 @Component({
-  selector: 'app-movie-card',
-  standalone: false,
+  selector: 'app-movie-card',     // Component selector
+  standalone: false,              // Part of NgModule
   templateUrl: './movie-card.html',
   styleUrls: ['./movie-card.scss']
 })
 export class MovieCardComponent implements OnInit, AfterViewInit {
+  // Array to store all movies fetched from API
   movies: any[] = [];
+
+  // Array to store user's favorite movie IDs
   favoriteMovies: string[] = [];
+
+  // Object to store current user information
   user: any = {};
 
+  /**
+   * Constructor injects required services and dependencies
+   * @param fetchApiData - Service for API communication
+   * @param cdr - Change detection reference for manual updates
+   * @param dialog - Material dialog service for popups
+   * @param snackBar - Material snackbar for user notifications
+   */
   constructor(
     public fetchApiData: FetchApiDataService,
     private cdr: ChangeDetectorRef,
@@ -25,10 +42,19 @@ export class MovieCardComponent implements OnInit, AfterViewInit {
     public snackBar: MatSnackBar
   ) { }
 
+  /**
+   * Component initialization lifecycle hook
+   * Initializes empty arrays - API calls made in AfterViewInit to avoid change detection errors
+   */
   ngOnInit(): void {
-    // Initialize empty array - don't call API here to avoid change detection errors
+    // Initialize component state - API calls moved to AfterViewInit
   }
 
+  /**
+   * Lifecycle hook that runs after the component's view has been fully initialized.
+   * Loads user data, fetches movies, and retrieves user's favorite movies.
+   * Using AfterViewInit prevents change detection errors during initialization.
+   */
   ngAfterViewInit(): void {
     // Call API after view is initialized to prevent change detection errors
     this.loadUserData();
@@ -36,6 +62,11 @@ export class MovieCardComponent implements OnInit, AfterViewInit {
     this.getFavoriteMovies();
   }
 
+  /**
+   * Fetches all movies from the API service.
+   * If API call fails, falls back to sample movie data for demonstration.
+   * Triggers change detection after data is loaded.
+   */
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
@@ -80,6 +111,10 @@ export class MovieCardComponent implements OnInit, AfterViewInit {
     });
   }
 
+  /**
+   * Loads user data from localStorage and parses it into the user object.
+   * Called during component initialization to restore user session data.
+   */
   loadUserData(): void {
     const userData = localStorage.getItem('user');
     if (userData) {
@@ -87,26 +122,51 @@ export class MovieCardComponent implements OnInit, AfterViewInit {
     }
   }
 
+  /**
+   * Checks if a user is currently logged in by verifying the presence
+   * of authentication token and user data in localStorage.
+   * @returns {boolean} True if user is logged in, false otherwise
+   */
   isUserLoggedIn(): boolean {
     return localStorage.getItem('token') !== null && localStorage.getItem('user') !== null;
   }
 
+  /**
+   * Handles image loading errors by setting a fallback SVG image.
+   * Called when a movie poster image fails to load.
+   * @param event - The error event from the failed image load
+   */
   onImageError(event: any): void {
     console.log('Image failed to load:', event.target.src);
     // Set a fallback image that should work
     event.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDMwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjNjY3ZWVhIi8+Cjx0ZXh0IHg9IjE1MCIgeT0iMTgwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJ3aGl0ZSIgZm9udC1zaXplPSIxNiIgZm9udC1mYW1pbHk9IkFyaWFsIj5Nb3ZpZTwvdGV4dD4KPHR0ZXh0IHg9IjE1MCIgeT0iMjEwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJ3aGl0ZSIgZm9udC1zaXplPSIxNiIgZm9udC1mYW1pbHk9IkFyaWFsIj5Qb3N0ZXI8L3RleHQ+Cjwvc3ZnPgo=';
   }
 
+  /**
+   * TrackBy function for ngFor to optimize rendering performance.
+   * Returns a unique identifier for each movie to prevent unnecessary re-renders.
+   * @param index - The index of the movie in the array
+   * @param movie - The movie object
+   * @returns {string} Unique identifier for the movie
+   */
   trackByMovieId(index: number, movie: any): string {
     return movie._id || index.toString();
   }
 
+  /**
+   * Sets the image error flag for a specific movie and triggers change detection.
+   * @param movie - The movie object that failed to load its image
+   */
   setImageError(movie: any): void {
     console.log('Image failed to load for:', movie.Title);
     movie.imageError = true;
     this.cdr.detectChanges();
   }
 
+  /**
+   * Clears the image error flag for a specific movie when image loads successfully.
+   * @param movie - The movie object that successfully loaded its image
+   */
   clearImageError(movie: any): void {
     console.log('Image loaded successfully for:', movie.Title);
     movie.imageError = false;
@@ -162,6 +222,11 @@ export class MovieCardComponent implements OnInit, AfterViewInit {
     });
   }
 
+  /**
+   * Removes a movie from the user's favorites list via API call.
+   * Shows success/error notifications and refreshes the favorites list.
+   * @param movieId - The unique identifier of the movie to remove from favorites
+   */
   removeFromFavorites(movieId: string): void {
     this.fetchApiData.deleteFavouriteMovie(movieId).subscribe((result: any) => {
       this.favoriteMovies = this.favoriteMovies.filter(id => id !== movieId);
@@ -176,6 +241,10 @@ export class MovieCardComponent implements OnInit, AfterViewInit {
     });
   }
 
+  /**
+   * Opens a dialog displaying detailed information about a specific movie.
+   * @param movie - The movie object containing details to display
+   */
   showMovieDetails(movie: any): void {
     console.log('Movie clicked:', movie);
     this.dialog.open(MovieDetailsDialogComponent, {
@@ -184,6 +253,10 @@ export class MovieCardComponent implements OnInit, AfterViewInit {
     });
   }
 
+  /**
+   * Opens a dialog displaying information about the movie's genre.
+   * @param movie - The movie object containing genre information
+   */
   showGenreDetails(movie: any): void {
     console.log('Genre clicked:', movie.Genre);
     this.dialog.open(MovieGenreDialogComponent, {
@@ -192,6 +265,10 @@ export class MovieCardComponent implements OnInit, AfterViewInit {
     });
   }
 
+  /**
+   * Opens a dialog displaying information about the movie's director.
+   * @param movie - The movie object containing director information
+   */
   showDirectorDetails(movie: any): void {
     console.log('Director clicked:', movie.Director);
     this.dialog.open(MovieDirectorDialogComponent, {
@@ -200,6 +277,10 @@ export class MovieCardComponent implements OnInit, AfterViewInit {
     });
   }
 
+  /**
+   * Opens a dialog displaying the movie's synopsis/description.
+   * @param movie - The movie object containing synopsis information
+   */
   showSynopsisDetails(movie: any): void {
     console.log('Synopsis clicked:', movie);
     this.dialog.open(MovieSynopsisDialogComponent, {

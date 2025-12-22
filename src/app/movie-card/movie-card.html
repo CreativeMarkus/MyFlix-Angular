@@ -1,12 +1,15 @@
+<!-- Main container for all movie cards display -->
 <div class="movies-container">
     <h2 mat-dialog-title>All Movies</h2>
 
+    <!-- Loading state display when movies are being fetched -->
     <div *ngIf="movies.length === 0" class="loading-message">
         <p>Loading movies...</p>
         <p>If this persists, check the console for API errors.</p>
     </div>
 
-    <!-- Sample movies notice for logged-out users -->
+    <!-- Information notice for users who are not logged in -->
+    <!-- Shows sample movies but encourages registration for full access -->
     <div *ngIf="movies.length > 0 && !isUserLoggedIn()" class="sample-notice">
         <mat-card class="notice-card">
             <mat-card-content>
@@ -22,10 +25,13 @@
         </mat-card>
     </div>
 
+    <!-- Main movies grid layout - displays when movies are loaded -->
     <div class="movies-grid" *ngIf="movies.length > 0">
+        <!-- Individual movie card - clickable to show details dialog -->
         <mat-card *ngFor="let movie of movies; let i=index; trackBy: trackByMovieId" class="movie-card"
             (click)="showMovieDetails(movie)">
             <mat-card-header>
+                <!-- Movie title display -->
                 <mat-card-title>{{movie.Title}}</mat-card-title>
             </mat-card-header>
 
