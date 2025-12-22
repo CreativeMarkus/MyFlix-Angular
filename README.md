@@ -2,41 +2,61 @@
 
 A complete Angular 17+ client application for the myFlix movie database, featuring user authentication, movie browsing, favorites management, and user profiles. Built with Angular Material and deployed on GitHub Pages.
 
-## Live Application
-
-**[View Live Application →](https://creativemarkus.github.io/MyFlix-Angular/)**
+**[View Live Application →](https://creativemarkus.github.io/MyFlix-Angular/)**  
+**[View API Documentation →](./docs/index.html)**
 
 ## Features
 
 ### Core Functionality
-**Welcome Screen**: Professional landing page with registration and login options  
-**User Registration**: Secure account creation with form validation  
-**User Authentication**: Login system with JWT token management  
-**Movie Catalog**: Browse complete movie database with detailed information  
-**Movie Details**: View comprehensive movie information, director, and genre details  
-**Favorites System**: Add/remove movies from personal favorites with localStorage backup  
-**User Profile**: Manage account details and view favorite movies collection  
-**Responsive Navigation**: Clean navbar with user-specific options  
+- **Welcome Screen**: Professional landing page with registration and login options  
+- **User Registration**: Secure account creation with form validation  
+- **User Authentication**: Login system with JWT token management  
+- **Movie Catalog**: Browse complete movie database with detailed information  
+- **Movie Details**: View comprehensive movie information, director, and genre details  
+- **Favorites System**: Add/remove movies from personal favorites with localStorage backup  
+- **User Profile**: Manage account details and view favorite movies collection  
+- **Responsive Navigation**: Clean navbar with user-specific options  
 
 ### Technical Features  
-**Angular Material**: Professional UI with consistent Material Design  
-**API Integration**: Full backend connectivity with fallback mechanisms  
-**NgModule Architecture**: Traditional Angular module structure  
-**Local Storage**: Persistent user data and favorites backup  
-**GitHub Pages**: Automated deployment pipeline  
-**Error Handling**: Comprehensive error management and user feedback  
+- **Angular Material**: Professional UI with consistent Material Design  
+- **API Integration**: Full backend connectivity with fallback mechanisms  
+- **NgModule Architecture**: Traditional Angular module structure  
+- **Local Storage**: Persistent user data and favorites backup  
+- **GitHub Pages**: Automated deployment pipeline  
+- **Error Handling**: Comprehensive error management and user feedback  
+- **TypeDoc Documentation**: Complete API documentation for all components and services  
 
 ## Technology Stack
 
 - **Angular 17+**: Modern framework with NgModule-based architecture
 - **Angular Material**: Complete UI component library with theming
-- **TypeScript**: Full type safety and modern JavaScript features
+- **TypeScript**: Full type safety and modern JavaScript features with comprehensive JSDoc documentation
 - **RxJS**: Reactive programming for HTTP API calls and state management
 - **Angular Router**: SPA navigation and route protection
 - **FormsModule**: Two-way data binding with validation
 - **SCSS**: Custom styling with Material Design theming
+- **TypeDoc**: Automated API documentation generation
 - **angular-cli-ghpages**: Automated GitHub Pages deployment
 - **Backend API**: Live Heroku backend at `https://movieapi1-40cbbcb4b0ea.herokuapp.com/`
+
+## Documentation
+
+This project includes comprehensive documentation generated with TypeDoc:
+
+### Generated Documentation
+- **API Reference**: Complete TypeScript API documentation in `docs/` directory
+- **Component Documentation**: Detailed JSDoc comments for all Angular components
+- **Service Documentation**: Full API service method documentation with parameters and return types
+- **Module Structure**: Complete project architecture overview
+
+### Accessing Documentation
+- **Local**: Open `docs/index.html` in your browser after running `npm run docs`
+- **Online**: [View Documentation](./docs/index.html) (when deployed)
+
+### Regenerating Documentation
+```bash
+npm run docs  # Generates fresh TypeDoc documentation
+```
 
 ## Components & Architecture
 
@@ -145,7 +165,7 @@ src/
 └── index.html                             # Application entry point
 ```
 
-## 🧪 Development & Testing
+## Development & Testing
 
 ### Development Server
 ```bash
@@ -159,10 +179,16 @@ ng build --configuration production
 # Output: dist/my-flix-angular-client/
 ```
 
+### Documentation Generation
+```bash
+npm run docs     # Generate TypeDoc API documentation
+# Output: docs/ directory with complete API reference
+```
+
 ### Testing
 ```bash
-ng test          # Unit tests with Vitest
-ng e2e           # End-to-end testing (framework of choice)
+npm test         # Unit tests with Karma
+ng e2e           # End-to-end testing
 ```
 
 ### Code Generation
@@ -196,12 +222,26 @@ This command:
 
 - **[Angular CLI Documentation](https://angular.dev/tools/cli)** - Complete CLI reference
 - **[Angular Material](https://material.angular.io/)** - UI component library
+- **[TypeDoc Documentation](https://typedoc.org/)** - Documentation generator
 - **[GitHub Pages](https://pages.github.com/)** - Static site hosting
 - **[myFlix API Documentation](https://movieapi1-40cbbcb4b0ea.herokuapp.com/)** - Backend API reference
+
+## Project Status
+
+✅ **Complete Angular Application** - Fully functional movie database client  
+✅ **Comprehensive Documentation** - TypeDoc-generated API documentation  
+✅ **Professional UI/UX** - Angular Material design system  
+✅ **Production Deployment** - Live on GitHub Pages  
+✅ **Clean Codebase** - No emoji artifacts, consistent formatting  
+✅ **Enterprise Ready** - Complete JSDoc comments and proper TypeScript patterns
 
 ## Developer
 
 **Markus** - [GitHub Profile](https://github.com/CreativeMarkus)
+
+---
+
+**Latest Update**: December 2024 - Added comprehensive TypeDoc documentation with JSDoc comments for all components and services.
 
 ## License
 
